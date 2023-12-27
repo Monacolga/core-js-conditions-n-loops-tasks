@@ -113,6 +113,15 @@ function isIsoscelesTriangle(a, b, c) {
  */
 function convertToRomanNumerals(/* num */) {
   throw new Error('Not implemented');
+  // let I = 1;
+  // let IV = 4;
+  // let V = 5;
+  // let X = 10;
+  // if (num > 9 && num < 20) {
+  //   num % 10;
+  //   return X;
+  // }
+  // return;
 }
 
 /**
@@ -146,8 +155,13 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  for (let i = 0; i < str.length / 2; i += 1) {
+    if (str[i] !== str[str.length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -164,8 +178,13 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -183,8 +202,18 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  function findDigit(number) {
+    if (number === 0) {
+      return false;
+    }
+    const lastDigit = number % 10;
+    if (lastDigit === digit) {
+      return true;
+    }
+    return findDigit(Math.floor(number / 10));
+  }
+  return findDigit(num);
 }
 
 /**
