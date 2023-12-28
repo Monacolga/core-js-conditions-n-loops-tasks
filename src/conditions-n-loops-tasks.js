@@ -38,8 +38,14 @@ function isPositive(number) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  if (a > b && a > c) {
+    return a;
+  }
+  if (b > a && b > c) {
+    return b;
+  }
+  return c;
 }
 
 /**
@@ -111,17 +117,37 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
-  // let I = 1;
-  // let IV = 4;
-  // let V = 5;
-  // let X = 10;
-  // if (num > 9 && num < 20) {
-  //   num % 10;
-  //   return X;
-  // }
-  // return;
+function convertToRomanNumerals(num) {
+  const romanNumbers = [
+    '',
+    'I',
+    'II',
+    'III',
+    'IV',
+    'V',
+    'VI',
+    'VII',
+    'VIII',
+    'IX',
+    'X',
+  ];
+
+  if (num < 11) {
+    return romanNumbers[num];
+  }
+  if (num > 10 && num < 20) {
+    return `X${romanNumbers[num - 10]}`;
+  }
+  if (num > 20 && num < 30) {
+    return `XX${romanNumbers[num - 20]}`;
+  }
+  if (num > 30 && num < 40) {
+    return `XXX${romanNumbers[num - 30]}`;
+  }
+  if (num === 20) {
+    return 'XX';
+  }
+  return 'XXX';
 }
 
 /**
@@ -139,8 +165,61 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  let words = '';
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+    switch (char) {
+      case '0':
+        words = 'zero';
+        break;
+      case '1':
+        words = 'one';
+        break;
+      case '2':
+        words = 'two';
+        break;
+      case '3':
+        words = 'three';
+        break;
+      case '4':
+        words = 'four';
+        break;
+      case '5':
+        words = 'five';
+        break;
+      case '6':
+        words = 'six';
+        break;
+      case '7':
+        words = 'seven';
+        break;
+      case '8':
+        words = 'eight';
+        break;
+      case '9':
+        words = 'nine';
+        break;
+      case '.':
+      case ',':
+        words = 'point';
+        break;
+      case '-':
+        words = 'minus';
+        break;
+      default:
+        words = '';
+        break;
+    }
+    result += `${words}`;
+    if (i !== numberStr.length - 1 && words !== '') {
+      result += ' ';
+    }
+  }
+
+  return result;
 }
 
 /**
