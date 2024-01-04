@@ -349,11 +349,11 @@ function getBalanceIndex(arr) {
  *        ]
  */
 function getSpiralMatrix(size) {
-  const result = [];
+  const martix = [];
   for (let i = 0; i < size; i += 1) {
-    result[i] = [];
+    martix[i] = [];
     for (let j = 0; j < size; j += 1) {
-      result[i][j] = 0;
+      martix[i][j] = 0;
     }
   }
 
@@ -365,31 +365,31 @@ function getSpiralMatrix(size) {
 
   while (top <= bottom && left <= right) {
     for (let i = left; i <= right; i += 1) {
-      result[top][i] = value;
+      martix[top][i] = value;
       value += 1;
     }
     top += 1;
 
     for (let i = top; i <= bottom; i += 1) {
-      result[i][right] = value;
+      martix[i][right] = value;
       value += 1;
     }
     right -= 1;
 
     for (let i = right; i >= left; i -= 1) {
-      result[bottom][i] = value;
+      martix[bottom][i] = value;
       value += 1;
     }
     bottom -= 1;
 
     for (let i = bottom; i >= top; i -= 1) {
-      result[i][left] = value;
+      martix[i][left] = value;
       value += 1;
     }
     left += 1;
   }
 
-  return result;
+  return martix;
 }
 
 /**
@@ -475,8 +475,28 @@ function sortByAsc(arr) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let newStr = str;
+  let iterationNum = iterations;
+
+  for (let i = 0; i < iterationNum; i += 1) {
+    let oddChars = '';
+    let evenChars = '';
+
+    for (let k = 0; k < str.length; k += 2) {
+      oddChars += newStr[k];
+    }
+    for (let k = 1; k < str.length; k += 2) {
+      evenChars += newStr[k];
+    }
+    newStr = `${oddChars}${evenChars}`;
+
+    if (newStr === str) {
+      iterationNum %= i + 1;
+      i = -1;
+    }
+  }
+  return newStr;
 }
 
 /**
